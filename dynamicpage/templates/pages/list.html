@@ -21,19 +21,20 @@
             color: white;
         }
         .pagination {
-            display: flex;
-            justify-content: center;
-            margin: 16px 0;
+            display: inline-block;
         }
         .pagination a {
-            margin: 0 4px;
+            color: black;
+            float: left;
             padding: 8px 16px;
             text-decoration: none;
-            border: 1px solid #ddd;
         }
-        .pagination a:hover {
+        .pagination a.active {
             background-color: #4CAF50;
             color: white;
+        }
+        .pagination a:hover:not(.active) {
+            background-color: #ddd;
         }
     </style>
 </head>
@@ -46,7 +47,7 @@
         <input type="submit" value="Filter">
     </form>
 
-    <a href="{% url 'dynamicpage:add_page' %}"><button type="button">Add Page</button></a>
+    <a href="{% url 'dynamicpage:add_page' %}"><button type="button">New Post</button></a>
 
     <table>
         <thead>
@@ -67,12 +68,21 @@
 
     <div class="pagination">
         {% if pages.has_previous %}
-            <a href="?page={{ pages.previous_page_number }}">Previous</a>
+            <a href="?page={{ pages.previous_page_number }}">«</a>
         {% endif %}
-        <span>{{ pages.number }}</span>
+    
+        {% for num in pages.paginator.page_range %}
+            {% if pages.number == num %}
+                <a class="active" href="?page={{ num }}">{{ num }}</a>
+            {% else %}
+                <a href="?page={{ num }}">{{ num }}</a>
+            {% endif %}
+        {% endfor %}
+    
         {% if pages.has_next %}
-            <a href="?page={{ pages.next_page_number }}">Next</a>
+            <a href="?page={{ pages.next_page_number }}">»</a>
         {% endif %}
     </div>
+    
 </body>
 </html>

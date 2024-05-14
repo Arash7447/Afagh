@@ -3,6 +3,9 @@ from .views import ListPageView, AddPageView, EditPageView, DeletePageView, Page
 
 app_name = 'dynamicpage'
 
+
+
+
 urlpatterns = [
     
     path('book/list/<str:dcrp>/', ListPageView.as_view(dcrp='book-dcrp'), name='list_page'),
