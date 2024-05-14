@@ -1,0 +1,11 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+  <h2>اضافه کردن صفحه</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">اضافه کردن</button>
+    <a href="{% url 'dynamic_page:list_page' %}">انصراف</a>
+  </form>
+{% endblock %}

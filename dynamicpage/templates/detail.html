@@ -1,0 +1,8 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+  <h2>جزئیات صفحه</h2>
+  <p>{{ page.title }}</p>
+  <p>{{ page.content }}</p>
+  <a href="{% url 'dynamic_page:list_page' %}">بازگشت به لیست</a>
+{% endblock %}

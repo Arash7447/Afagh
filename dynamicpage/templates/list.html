@@ -1,0 +1,14 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+  <h2>لیست صفحات</h2>
+  <ul>
+    {% for page in pages %}
+      <li>
+        <a href="{% url 'dynamic_page:page_detail' page.pk %}">{{ page.title }}</a>
+      </li>
+    {% empty %}
+      <li>صفحه‌ای وجود ندارد.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
