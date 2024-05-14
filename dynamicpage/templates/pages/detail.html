@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Page Detail</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .detail-container {
+            width: 100%;
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        .detail-container h2 {
+            color: #4CAF50;
+        }
+        .detail-container button {
+            padding: 8px 16px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 16px;
+        }
+        .detail-container button:hover {
+            background-color: #da190b;
+        }
+    </style>
+</head>
+<body>
+    <h1>Page Detail</h1>
+
+    <div class="detail-container">
+        <h2>Title: {{ page.title }}</h2>
+        <p>Content: {{ page.content }}</p>
+        <a href="{% url 'dynamicpage:edit_page' page.id %}"><button type="button">Edit</button></a>
+        <a href="{% url 'dynamicpage:delete_page' page.id %}"><button type="button">Delete</button></a>
+    </div>
+</body>
+</html>

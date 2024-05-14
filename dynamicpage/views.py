@@ -9,9 +9,10 @@ from .models import Page
 class ListPageView (ListView):
    
     model = Page
-    template_name = 'templates/list.html'
+    template_name = 'pages/list.html'
     context_object_name = 'pages'
     paginate_by = 5
+    dcrp = None
 
     def get_queryset (self):
         
@@ -22,9 +23,10 @@ class ListPageView (ListView):
         if title:
             queryset = queryset.filter (title__icontains=title)
         if content:
-            queryset = queryset.filter (title__icontains=content)
+            queryset = queryset.filter (content__icontains=content)
 
         return queryset
+
 
 class PageDetailView (DetailView):
 
@@ -40,15 +42,16 @@ class AddPageView (CreateView):
     fields = ('title', 'content')
 
 
-class EditPageView (UpdateView):
-    
-    model = Page    
+class EditPageView(UpdateView):
+    model = Page
     template_name = 'pages/edit.html'
     fields = ('title', 'content')
+    success_url = '/book/list/book-dcrp/' 
+
 
 
 class DeletePageView (DeleteView):
     
     model = Page
     template_name = 'pages/delete.html'
-    success_url = reverse_lazy('pages:list')
+    success_url = '/book/list/book-dcrp/' 

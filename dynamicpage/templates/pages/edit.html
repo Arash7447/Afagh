@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        form {
+            width: 100%;
+            margin: 0 auto;
+            padding: 8px;
+        }
+        form input[type="text"], form textarea {
+            width: 100%;
+            margin-bottom: 8px;
+            padding: 8px;
+        }
+        form input[type="submit"] {
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        form input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Edit Page</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Update Page">
+        <a href="{% url 'dynamicpage:list_page' 'book-dcrp' %}"><button type="button">Cancel</button></a>
+
+    </form>
+</body>
+</html>

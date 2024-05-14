@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .delete-container {
+            width: 100%;
+            margin: 0 auto;
+            padding: 8px;
+            text-align: center;
+        }
+        .delete-container h2 {
+            color: #4CAF50;
+        }
+        .delete-container p {
+            margin-bottom: 16px;
+        }
+        .delete-container button {
+            padding: 8px 16px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .delete-container button:hover {
+            background-color: #da190b;
+        }
+    </style>
+</head>
+<body>
+    <h1>Delete Page</h1>
+
+    <div class="delete-container">
+        <h2>Are you sure you want to delete this page?</h2>
+        <p>Title: {{ page.title }}</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit">Delete Page</button>
+            <a href="{% url 'dynamicpage:list_page' 'book-dcrp' %}"><button type="button">Cancel</button></a>
+
+        </form>
+    </div>
+</body>
+</html>
