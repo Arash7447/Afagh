@@ -20,6 +20,21 @@
             background-color: #4CAF50;
             color: white;
         }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin: 16px 0;
+        }
+        .pagination a {
+            margin: 0 4px;
+            padding: 8px 16px;
+            text-decoration: none;
+            border: 1px solid #ddd;
+        }
+        .pagination a:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -30,6 +45,8 @@
         <input type="text" name="content" placeholder="Content">
         <input type="submit" value="Filter">
     </form>
+
+    <a href="{% url 'dynamicpage:add_page' %}"><button type="button">Add Page</button></a>
 
     <table>
         <thead>
@@ -47,5 +64,15 @@
             {% endfor %}
         </tbody>
     </table>
+
+    <div class="pagination">
+        {% if pages.has_previous %}
+            <a href="?page={{ pages.previous_page_number }}">Previous</a>
+        {% endif %}
+        <span>{{ pages.number }}</span>
+        {% if pages.has_next %}
+            <a href="?page={{ pages.next_page_number }}">Next</a>
+        {% endif %}
+    </div>
 </body>
 </html>

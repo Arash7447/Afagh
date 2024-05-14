@@ -1,8 +1,12 @@
 from django.db.models.query import QuerySet
 from django.shortcuts import render
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from .models import Page
+from rest_framework import viewsets, pagination
+from .models import Page
+from .serializers import PageSerializer
+
 
 # Create your views here.
 
@@ -33,6 +37,9 @@ class PageDetailView (DetailView):
     model = Page
     template_name = 'pages/detail.html'
 
+    def get_success_url(self):
+        return reverse('dynamicpage:list_page', kwargs={'dcrp': 'book-dcrp'})
+
 
 
 class AddPageView (CreateView):
@@ -40,6 +47,7 @@ class AddPageView (CreateView):
     model = Page
     template_name = 'pages/add.html'
     fields = ('title', 'content')
+    success_url = '/book/list/book-dcrp/'
 
 
 class EditPageView(UpdateView):
@@ -55,3 +63,12 @@ class DeletePageView (DeleteView):
     model = Page
     template_name = 'pages/delete.html'
     success_url = '/book/list/book-dcrp/' 
+
+
+class PageNumberPagination(pagination.PageNumberPagination):
+    page_size = 5
+
+class PageViewSet(viewsets.ModelViewSet):
+    queryset = Page.objects.all()
+    serializer_class = PageSerializer
+    pagination_class = PageNumberPagination
