@@ -42,6 +42,7 @@
         <p>Content: {{ page.content }}</p>
         <a href="{% url 'dynamicpage:edit_page' page.id %}"><button type="button">Edit</button></a>
         <a href="{% url 'dynamicpage:delete_page' page.id %}"><button type="button">Delete</button></a>
+        <a href="{% url 'dynamicpage:list_page' 'book-dcrp' %}"><button type="button">Cancel</button></a>
     </div>
 
     <div class="details-container">
@@ -50,6 +51,7 @@
             {% csrf_token %}
             <textarea name="details" placeholder="Enter details here"></textarea>
             <button type="submit">Add Details</button>
+            
         </form>
     </div>
 </body>
